@@ -1,7 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+//   DataAnnotations kütüphanesi doğrulama (validation) için kullanılır.
+//   [Required], [StringLength], [Range] gibi öznitelikler (attribute) sağlar.
+//   Bu sayede gelen verileri controller’a ulaşmadan önce otomatik kontrol edebilir
 
 namespace TaskManagerAPI.DTOs
 {
+    // TaskReadDto → veriyi kullanıcıya dönerken (Response) kullanılan model.
+    //   'record' türü, immutable (değiştirilemez) veri yapısıdır — sadece veri tutar, davranış (method) içermez.
     public record TaskReadDto(
         int Id,
         string Title,
@@ -10,7 +15,7 @@ namespace TaskManagerAPI.DTOs
         DateTime CreatedAt
     );
 
-    public class TaskCreateDto
+    public class TaskCreateDto //kullanıcı yeni görev eklerken (POST) kullandığı model.
     {
         [Required, StringLength(100)]
         public string Title { get; set; } = string.Empty;
@@ -19,7 +24,7 @@ namespace TaskManagerAPI.DTOs
         public string? Description { get; set; }
     }
 
-    public class TaskUpdateDto
+    public class TaskUpdateDto //kullanıcı görevi güncellerken (PUT/PATCH) kullandığı model.
     {
         [Required, StringLength(100)]
         public string Title { get; set; } = string.Empty;
